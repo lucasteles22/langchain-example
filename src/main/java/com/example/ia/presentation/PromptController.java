@@ -1,5 +1,7 @@
 package com.example.ia.presentation;
 
+import javax.validation.Valid;
+
 import com.example.ia.application.PromptFlow;
 import com.example.ia.domain.dto.AnswerDTO;
 import com.example.ia.domain.dto.PromptDTO;

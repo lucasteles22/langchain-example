@@ -20,6 +20,7 @@
     <micronaut.version>4.8.2</micronaut.version>
     <micronaut.aot.enabled>false</micronaut.aot.enabled>
     <lombok.version>1.18.38</lombok.version>
+    <mapdb.version>3.1.0</mapdb.version>
     <micronaut.aot.packageName>com.example.aot.generated</micronaut.aot.packageName>
     <micronaut.runtime>netty</micronaut.runtime>
     <exec.mainClass>com.example.Application</exec.mainClass>
@@ -62,6 +63,12 @@
       <artifactId>lombok</artifactId>
       <version>${lombok.version}</version>
       <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mapdb</groupId>
+      <artifactId>mapdb</artifactId>
+      <version>${mapdb.version}</version>
     </dependency>
 
     <dependency>
@@ -141,6 +148,11 @@
               <groupId>org.projectlombok</groupId>
               <artifactId>lombok</artifactId>
               <version>${lombok.version}</version>
+            </path>
+            <path>
+              <groupId>io.micronaut</groupId>
+              <artifactId>micronaut-http-validation</artifactId>
+              <version>${micronaut.core.version}</version>
             </path>
           </annotationProcessorPaths>
           <compilerArgs>

@@ -1,15 +1,20 @@
 package com.example.ia.domain.dto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
-import io.micronaut.core.annotation.Introspected;
 import io.micronaut.serde.annotation.Serdeable;
+import jakarta.annotation.Nonnull;
+import lombok.Builder;
+import lombok.Getter;
 
-@Introspected
 @Serdeable
-public record PromptDTO(String input) {
+@Builder
+@Getter
+public class PromptDTO {
 
-    public String getUserIdentifier() {
-        return "1";
-    }
+    @NotBlank
+    @NotEmpty
+    @Nonnull
+    private final String input;
 }
