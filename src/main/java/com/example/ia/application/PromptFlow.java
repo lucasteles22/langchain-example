@@ -1,23 +1,30 @@
 package com.example.ia.application;
 
-import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_O_MINI;
-
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
+import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_O;
+
+import com.example.ia.domain.dto.AnswerDTO;
+import com.example.ia.domain.dto.PromptDTO;
+
+import jakarta.annotation.Nonnull;
 import jakarta.inject.Singleton;
 
 @Singleton
 public class PromptFlow {
 
-    public String talk() {
+    @Nonnull
+    public AnswerDTO talk(PromptDTO prompt) {
         ChatLanguageModel chatModel = OpenAiChatModel.builder()
                 .apiKey(System.getenv("OPENAI_API_KEY"))
-                .modelName(GPT_4_O_MINI)
-                .temperature(0.2)
+                .modelName(GPT_4_O)
+                .temperature(0.9)
                 .build();
 
-        String answer = chatModel.chat("Escreva uma frase sobre o descobrimento do brasil");
+        String answer = chatModel.chat(prompt.input());
 
-        return answer;
+        return AnswerDTO.builder()
+                .output(answer)
+                .build();
     }
 }

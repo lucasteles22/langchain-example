@@ -1,21 +1,28 @@
 package com.example.ia.presentation;
 
 import com.example.ia.application.PromptFlow;
+import com.example.ia.domain.dto.AnswerDTO;
+import com.example.ia.domain.dto.PromptDTO;
 
-import io.micronaut.http.MediaType;
+import io.micronaut.http.HttpResponse;
+import io.micronaut.http.HttpStatus;
+import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.Post;
 import jakarta.annotation.Nonnull;
 import lombok.RequiredArgsConstructor;
 
-@Controller("/input")
+@Controller("/prompt")
 @RequiredArgsConstructor
 public class PromptController {
 
     private final @Nonnull PromptFlow flow;
 
-    @Get(produces = MediaType.TEXT_PLAIN)
-    public String input() {
-        return flow.talk();
+    @Post
+    public HttpResponse<AnswerDTO> input(@Body PromptDTO promptDTO) {
+        AnswerDTO answer = flow.talk(promptDTO);
+
+        return HttpResponse.status(HttpStatus.OK)
+                .body(answer);
     }
 }
